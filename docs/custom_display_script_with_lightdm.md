@@ -8,16 +8,14 @@ people who have multi monitor setup.
 
 ## Method 1. With xrandr (most easy to use and setup)
 
-### Steps with xrandr
-
-#### Install requirements
+### Install requirements
 
 ```bash
 sudo pacman -Syu
 sudo pacman -S xorg-xrandr
 ```
 
-#### 🖥️ 1. Generate .xrandr.conf File Automatically
+### 🖥️ 1. Generate .xrandr.conf File Automatically
 
 This script analyzes your current monitor layout using xrandr and creates
 a .xrandr.conf file in your home directory. The file will contain an xrandr
@@ -79,7 +77,7 @@ echo "$XRANDR_CMD" >"$OUT"
 echo "Saved xrandr command to $OUT"
 ```
 
-#### 2. Add following command in your i3wm config or startup scripts
+### 2. Add following command in your i3wm config or startup scripts
 
 ```bash
 exec_always --no-startup-id "~/.config/i3/scripts/xrandr_command_generator.sh"
@@ -141,7 +139,7 @@ won't break.
 
 ---
 
-#### ⚠️ Having issues?
+### ⚠️ Having issues?
 
 If the display script isn't working, try adjusting this line in the `[LightDM]`
 section of the same file:
@@ -182,5 +180,177 @@ Or:
 ```bash
 sudo cat /var/log/lightdm/x-0.log.old
 ```
+
+---
+
+## 🔧 Method 2: Using `autorandr` (Easy but needs extra setup)
+
+### ✅ Step 1: Install `autorandr`
+
+Run the following commands to install `autorandr`:
+
+```bash
+sudo pacman -Syu
+sudo pacman -S autorandr
+```
+
+---
+
+### ✅ Step 2: Enable and start the `autorandr` service
+
+To use `autorandr`, enable and start it as your regular user:
+
+```bash
+systemctl --user enable autorandr
+systemctl --user start autorandr
+```
+
+**Or**, if needed, enable it as root user (not common):
+
+```bash
+sudo systemctl --user enable autorandr
+sudo systemctl --user start autorandr
+```
+
+---
+
+### 🖥️ Step 3: Create an `autorandr` profile
+
+You can save your current monitor layout into a profile like this:
+
+```bash
+autorandr -s <profile-name> --force
+```
+
+Replace `<profile-name>` with something like `home`, `office`, etc.
+
+This saves the display setup to:  
+`~/.config/autorandr/<profile-name>/config`
+
+---
+
+### ⚙️ Step 4: Create a systemd service to sync the profile
+
+This will auto-copy the saved profile to system space for LightDM to use.
+
+Create a new systemd service file:
+
+```bash
+sudo nano /etc/systemd/system/autorandrlastUsed@.service
+```
+
+Paste this into the file:
+
+```ini
+[Unit]
+Description=Copy autorandr profile from %i user to LightDM dir
+DefaultDependencies=no
+Before=shutdown.target reboot.target halt.target
+ConditionPathExists=/home/%i/.config/autorandr/<profile-name>
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/true
+ExecStop=/usr/local/bin/copy-lastused.sh %i
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+🔁 Replace `<profile-name>` with your saved profile name.
+
+---
+
+### 📝 Step 5: Create the `copy-lastused.sh` script
+
+This script copies your saved profile to `/etc/xdg/autorandr/`.
+
+Create the script:
+
+```bash
+sudo nano /usr/local/bin/copy-lastused.sh
+```
+
+Paste this into the file:
+
+```bash
+#!/bin/bash
+
+USER="$1"
+USER_HOME="/home/$USER"
+LASTUSED="$USER_HOME/.config/autorandr/<profile-name>"
+DEST_DIR="/etc/xdg/autorandr/"
+LOG_FILE="/var/log/custom/monitors-copy.log"
+: >"$LOG_FILE"
+
+log() {
+  echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >>"$LOG_FILE"
+  # logger -t copy-lastused "$1"  # Optional system log
+}
+
+log "Running copy for: $USER"
+log "Checking at: $LASTUSED"
+
+if [[ -d "$LASTUSED" ]]; then
+  mkdir -p "$DEST_DIR"
+  if cp -r "$LASTUSED" "$DEST_DIR"; then
+    log "Copied: $LASTUSED -> $DEST_DIR"
+  else
+    log "ERROR: Failed to copy"
+  fi
+else
+  log "WARNING: Profile not found at: $LASTUSED"
+fi
+```
+
+> 📂 Make sure the folder `/etc/xdg/autorandr/` exists, or make one:
+>
+> ```bash
+> sudo mkdir -r /etc/xdg/autorandr/
+> ```
+
+#### Also
+
+> 📂 Make sure the folder `/var/log/custom/` exists, or change this line:
+>
+> ```bash
+> LOG_FILE="/var/log/custom/monitors-copy.log"
+> ```
+>
+> To:
+>
+> ```bash
+> LOG_FILE="/var/log/monitors-copy.log"
+> ```
+
+Make the script executable:
+
+```bash
+chmod +x /usr/local/bin/copy-lastused.sh
+```
+
+---
+
+### ⚙️ Step 6: Add autorandr to LightDM
+
+In your LightDM config file at `/etc/lightdm/lightdm.conf`,  
+find the line under `[Seat:*]` that starts with `display-setup-script`.
+
+Replace or add this line:
+
+```bash
+display-setup-script=/bin/bash -c 'autorandr --load <profile-name> || true'
+```
+
+🔁 Replace `<profile-name>` with the name you saved earlier.
+
+---
+
+### 📝 Optional: Link to LightDM setup
+
+See the setup steps for LightDM:  
+[Go to LightDM config section](#🛠️-3-configure-lightdm)
 
 ---
