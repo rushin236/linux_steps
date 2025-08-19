@@ -208,8 +208,8 @@ systemctl --user start autorandr
 **Or**, if needed, enable it as root user (not common):
 
 ```bash
-sudo systemctl --user enable autorandr
-sudo systemctl --user start autorandr
+sudo systemctl enable autorandr
+sudo systemctl start autorandr
 ```
 
 ---
