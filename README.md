@@ -24,6 +24,7 @@ This repo serves as a hands-on guide and documentation for:
 - ✅ [LightDM Custom Display Script](./docs/custom_display_script_with_lightdm.md)
 - ✅ [Enable Secure Boot Arch Linux](./docs/enable_secure_boot_in_arch_linux.md)
 - ✅ [Install Systemd Boot Loader Arch Linux](./docs/how_to_install_systemd_boot_loader.md)
+- ✅ [How to Recover Broken Arch Linux install](./docs/how_recover_broken_arch_linux_install.md)
 
 _...more coming soon._
 
