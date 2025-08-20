@@ -19,8 +19,11 @@ This repo serves as a hands-on guide and documentation for:
 > Click on a topic to view specific steps and notes:
 
 - ✅ [How to Install Software](./docs/how_to_install_software.md)
-- 📦️ [YAY (AUR Helper) Setup](./docs/yay_setup.md)
-- 📶 [Set Up WiFi from Terminal](./docs/setup_wifi.md)
+- ✅ [YAY (AUR Helper) Setup](./docs/yay_setup.md)
+- ✅ [Set Up WiFi from Terminal](./docs/setup_wifi.md)
+- ✅ [LightDM Custom Display Script](./docs/custom_display_script_with_lightdm.md)
+- ✅ [Enable Secure Boot Arch Linux](./docs/enable_secure_boot_in_arch_linux.md)
+- ✅ [Install Systemd Boot Loader Arch Linux](./docs/how_to_install_systemd_boot_loader.md)
 
 _...more coming soon._
 
