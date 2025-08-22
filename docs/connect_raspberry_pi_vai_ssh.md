@@ -5,7 +5,7 @@
    First install Tiger VPN
 
    ```bash
-   sudo pacman -S tightvncserver
+   sudo pacman -S tightvnc
    ```
 
    Then install the arp-scan tool
