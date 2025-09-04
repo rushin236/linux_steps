@@ -98,7 +98,11 @@ exec --no-startup-id bash "$HOME/.xrandr.conf"
 
 This will run the display setup commands at startup.
 
-### 🛠️ 3. Configure LightDM
+<!-- ### 🛠️ 3. Configure LightDM -->
+
+<!-- markdownlint-disable MD033 -->
+<h3 id="configure-lightdm">🛠️ 3. Configure LightDM</h3>
+<!-- markdownlint-enable MD033 -->
 
 To run your display setup script automatically when LightDM starts, follow
 these steps:
@@ -350,7 +354,7 @@ display-setup-script=/bin/bash -c 'autorandr --load <profile-name> || true'
 
 ### 📝 Optional: Link to LightDM setup
 
-See the setup steps for LightDM:  
-[Go to LightDM config section](#🛠️-3-configure-lightdm)
+See the setup steps for LightDM:
+[Go to LightDM config section️](#configure-lightdm)
 
 ---
