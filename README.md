@@ -25,6 +25,8 @@ This repo serves as a hands-on guide and documentation for:
 - ✅ [Enable Secure Boot Arch Linux](./docs/enable_secure_boot_in_arch_linux.md)
 - ✅ [Install Systemd Boot Loader Arch Linux](./docs/how_to_install_systemd_boot_loader.md)
 - ✅ [How to Recover Broken Arch Linux install](./docs/how_recover_broken_arch_linux_install.md)
+- ✅ [How to setup fast mirrors for updating arch with pacman](./docs/reflector_usage.md)
+- ✅ [Qemu VMs setup after install](./docs/qemu_vm_setup.md)
 
 _...more coming soon._
 
