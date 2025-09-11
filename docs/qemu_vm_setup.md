@@ -38,30 +38,35 @@ When creating VM in **virt-manager**:
 ### Arch Linux
 
 ```bash
-sudo pacman -S qemu-guest-agent spice-vdagent xf86-video-qxl
-sudo systemctl enable --now qemu-guest-agent
+sudo pacman -S qemu-guest-agent spice-vdagent
 ```
 
 ### Ubuntu / Debian
 
 ```bash
-sudo apt install qemu-guest-agent spice-vdagent xserver-xorg-video-qxl
-sudo systemctl enable --now qemu-guest-agent
+sudo apt install qemu-guest-agent spice-vdagent
 ```
 
 ### Fedora / RHEL / CentOS
 
 ```bash
-sudo dnf install qemu-guest-agent spice-vdagent xorg-x11-drv-qxl
-sudo systemctl enable --now qemu-guest-agent
+sudo dnf install qemu-guest-agent spice-vdagent
 ```
 
 ### openSUSE
 
 ```bash
 sudo zypper install qemu-guest-agent spice-vdagent xorg-x11-driver-video
-sudo systemctl enable --now qemu-guest-agent
 ```
+### Finally enable both services
+
+```bash
+sudo systemctl enable --now qemu-guest-agent
+sudo systemctl enable --now spice-vdagentd
+```
+
+Now shutdown the vm and start it again, 
+if it does not work just do a reboot after VM starts
 
 ---
 
