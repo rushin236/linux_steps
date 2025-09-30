@@ -243,7 +243,35 @@ Create a new systemd service file:
 sudo nano /etc/systemd/system/autorandrlastUsed@.service
 ```
 
-Paste this into the file:
+This version is a better then the last one as it works with
+shutdown, reboot and logout. It will also work if you have
+separate `[/home]` and `[root]` partitions.
+
+Paste the below code:
+
+```ini
+[Unit]
+Description=Copy autorandr lastUsed for %i on logout/shutdown/reboot
+DefaultDependencies=no
+# Make sure we run before /home unmounts and before shutdown completes
+Before=umount.target shutdown.target reboot.target halt.target exit.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/true
+ExecStop=/usr/local/bin/copy-lastused.sh %i
+
+[Install]
+WantedBy=multi-user.target
+WantedBy=halt.target
+WantedBy=reboot.target
+WantedBy=shutdown.target
+```
+
+or below is the first version so I have kept it.
+only works with shutdown and reboot only if the
+`[/home]` and `[root]` are under one single partition.
 
 ```ini
 [Unit]
@@ -263,11 +291,17 @@ TimeoutStopSec=10
 WantedBy=multi-user.target
 ```
 
-🔁 Replace `<profile-name>` with your saved profile name.
+Now enable the service as following
+
+```bash
+systemctl enable autorandrlastUsed@<your user name>.service
+```
+
+Replace `<profile-name>` with your saved profile name.
 
 ---
 
-### 📝 Step 5: Create the `copy-lastused.sh` script
+### Step 5: Create the `copy-lastused.sh` script
 
 This script copies your saved profile to `/etc/xdg/autorandr/`.
 
@@ -286,7 +320,10 @@ USER="$1"
 USER_HOME="/home/$USER"
 LASTUSED="$USER_HOME/.config/autorandr/<profile-name>"
 DEST_DIR="/etc/xdg/autorandr/"
-LOG_FILE="/var/log/custom/monitors-copy.log"
+# For better organization of logs
+# LOG_FILE="/var/log/custom/monitors-copy.log"
+# else will find logs in default place
+LOG_FILE="/var/log/monitors-copy.log"
 : >"$LOG_FILE"
 
 log() {
@@ -309,7 +346,7 @@ else
 fi
 ```
 
-> 📂 Make sure the folder `/etc/xdg/autorandr/` exists, or make one:
+> Make sure the folder `/etc/xdg/autorandr/` exists, or make one:
 >
 > ```bash
 > sudo mkdir -r /etc/xdg/autorandr/
@@ -317,16 +354,10 @@ fi
 
 #### Also
 
-> 📂 Make sure the folder `/var/log/custom/` exists, or change this line:
+> Make sure the folder `/var/log/custom/` exists if using the organised version:
 >
 > ```bash
 > LOG_FILE="/var/log/custom/monitors-copy.log"
-> ```
->
-> To:
->
-> ```bash
-> LOG_FILE="/var/log/monitors-copy.log"
 > ```
 
 Make the script executable:
