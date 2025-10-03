@@ -1,4 +1,4 @@
-# 🐧 How to do stuff in Linux
+# How to do stuff in Linux
 
 Welcome to my personal Linux guide repo! This is a collection of helpful
 commands, setups, and tricks that I regularly use on my
@@ -14,7 +14,7 @@ This repo serves as a hands-on guide and documentation for:
 
 ---
 
-## 📚 Index
+## Index
 
 > Click on a topic to view specific steps and notes:
 
@@ -32,7 +32,7 @@ _...more coming soon._
 
 ---
 
-## 🧠 Notes
+## Notes
 
 - All instructions assume you're using **Arch Linux** (or Arch-based).
 - Some commands may require `sudo`.
@@ -40,7 +40,7 @@ _...more coming soon._
 
 ---
 
-## 📌 Tip
+## Tip
 
 To quickly search through this repo locally:
 

@@ -146,17 +146,17 @@ reboot
 1. Boot into your Arch system
 2. Check system status:
 
-   ```bash
-   systemctl --failed
-   journalctl -xb
+    ```bash
+    systemctl --failed
+    journalctl -xb
 
-   ```
+    ```
 
 3. Verify all services are running:
 
-   ```bash
-   systemctl status
-   ```
+    ```bash
+    systemctl status
+    ```
 
 ## Troubleshooting Tips
 

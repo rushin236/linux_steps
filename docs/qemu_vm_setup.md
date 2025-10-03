@@ -1,15 +1,15 @@
-# 🖥️ QEMU/KVM Guest Setup Guide
+# QEMU/KVM Guest Setup Guide
 
 Make your QEMU VMs work smoothly with:
 
-- ✅ Clipboard sharing (host ↔ guest)
-- ✅ Auto-resizing display
-- ✅ Graceful shutdown/reboot
-- ✅ Better graphics performance
+- Clipboard sharing (host ↔ guest)
+- Auto-resizing display
+- Graceful shutdown/reboot
+- Better graphics performance
 
 ---
 
-## 🔹 Host (Linux with QEMU/KVM)
+## Host (Linux with QEMU/KVM)
 
 Install required packages:
 
@@ -33,7 +33,7 @@ When creating VM in **virt-manager**:
 
 ---
 
-## 🔹 Guest Setup
+## Guest Setup
 
 ### Arch Linux
 
@@ -65,7 +65,7 @@ sudo systemctl enable --now qemu-guest-agent
 
 ---
 
-## 🔹 What You Get
+## What You Get
 
 - 📋 Copy & paste works between host ↔ guest
 - 🖼️ VM display auto-adjusts to window size
