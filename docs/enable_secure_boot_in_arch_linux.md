@@ -24,84 +24,84 @@ Before you begin, ensure you have the following:
 
 1. Update your system:
 
-   ```sh
-   sudo pacman -Syu
-   ```
+    ```sh
+    sudo pacman -Syu
+    ```
 
 2. Install `sbctl`:
 
-   ```sh
-   sudo pacman -S sbctl
-   ```
+    ```sh
+    sudo pacman -S sbctl
+    ```
 
 ## Step 3: Generate and Enroll Keys
 
 1. Generate a new key pair:
 
-   ```sh
-   sudo sbctl create-keys
-   ```
+    ```sh
+    sudo sbctl create-keys
+    ```
 
 2. Enroll the keys in the UEFI firmware:
 
-   ```sh
-   sudo sbctl enroll-keys
-   ```
+    ```sh
+    sudo sbctl enroll-keys
+    ```
 
-   Or:
+    Or:
 
-   ```sh
-   sudo sbctl enroll-keys -m # For enrolling the micro soft vendor keys
-   ```
+    ```sh
+    sudo sbctl enroll-keys -m # For enrolling the micro soft vendor keys
+    ```
 
-   Follow the on-screen instructions to enroll the keys. This
-   usually involves rebooting into the UEFI firmware settings and
-   enrolling the keys manually.
+    Follow the on-screen instructions to enroll the keys. This
+    usually involves rebooting into the UEFI firmware settings and
+    enrolling the keys manually.
 
 ## Step 4: Sign the Bootloader
 
 1. Sign the bootloader (e.g., GRUB):
 
-   Use the following command to see which all .efi files you need to sign
+    Use the following command to see which all .efi files you need to sign
 
-   ```sh
-   sudo sbctl --verify
-   ```
+    ```sh
+    sudo sbctl --verify
+    ```
 
-   Then sign all the keys as shown in following example
+    Then sign all the keys as shown in following example
 
-   ```sh
-   sudo sbctl sign -s /boot/efi/EFI/arch/grubx64.efi
-   ```
+    ```sh
+    sudo sbctl sign -s /boot/efi/EFI/arch/grubx64.efi
+    ```
 
-   Replace `/boot/efi/EFI/arch/grubx64.efi` with the path to your
-   bootloader's EFI binary if it's different.
+    Replace `/boot/efi/EFI/arch/grubx64.efi` with the path to your
+    bootloader's EFI binary if it's different.
 
 2. Sign the kernel:
 
-   ```sh
-   sudo sbctl sign -s /boot/vmlinuz-linux
-   ```
+    ```sh
+    sudo sbctl sign -s /boot/vmlinuz-linux
+    ```
 
-   Replace `/boot/vmlinuz-linux` with the path to your kernel if it's
-   different.
+    Replace `/boot/vmlinuz-linux` with the path to your kernel if it's
+    different.
 
 3. Sign the initramfs:
 
-   ```sh
-   sudo sbctl sign -s /boot/initramfs-linux.img
-   ```
+    ```sh
+    sudo sbctl sign -s /boot/initramfs-linux.img
+    ```
 
-   Replace `/boot/initramfs-linux.img` with the path to your
-   initramfs if it's different.
+    Replace `/boot/initramfs-linux.img` with the path to your
+    initramfs if it's different.
 
 ## Step 5: Enable Secure Boot
 
 1. Reboot your system:
 
-   ```sh
-   sudo reboot
-   ```
+    ```sh
+    sudo reboot
+    ```
 
 2. Enter the UEFI firmware settings (usually by pressing a key like
    `F2`, `F10`, `Del`, or `Esc` during boot).
@@ -116,22 +116,22 @@ Before you begin, ensure you have the following:
 
 2. Verify that Secure Boot is enabled:
 
-   ```sh
-   sudo mokutil --sb-state
-   ```
+    ```sh
+    sudo mokutil --sb-state
+    ```
 
-   The output should indicate that Secure Boot is enabled.
+    The output should indicate that Secure Boot is enabled.
 
 3. Verify the signatures of your signed binaries:
 
-   ```sh
-   sudo sbctl verify /boot/efi/EFI/arch/grubx64.efi
-   sudo sbctl verify /boot/vmlinuz-linux
-   sudo sbctl verify /boot/initramfs-linux.img
-   ```
+    ```sh
+    sudo sbctl verify /boot/efi/EFI/arch/grubx64.efi
+    sudo sbctl verify /boot/vmlinuz-linux
+    sudo sbctl verify /boot/initramfs-linux.img
+    ```
 
-   Replace the paths with the actual paths to your bootloader,
-   kernel, and initramfs if they are different.
+    Replace the paths with the actual paths to your bootloader,
+    kernel, and initramfs if they are different.
 
 ## Troubleshooting
 

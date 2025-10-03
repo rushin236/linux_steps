@@ -1,4 +1,4 @@
-# ✅ How to Install Software on Arch Linux
+# How to Install Software on Arch Linux
 
 This guide covers the most common ways to install software on an
 Arch Linux system — using both official repositories and the AUR (Arch User Repository).
@@ -7,11 +7,11 @@ you’ll find step-by-step instructions here.
 
 ---
 
-## 🏬 1. Using Pacman (Official Repositories)
+## 1. Using Pacman (Official Repositories)
 
 Arch Linux ships with `pacman` as the default package manager.
 
-### 🔍 1.1 Search for a Package
+### 1.1 Search for a Package
 
 ```bash
 pacman -Ss <package_name>
@@ -23,7 +23,7 @@ Example:
 pacman -Ss firefox
 ```
 
-### 📥 1.2 Install a Package
+### 1.2 Install a Package
 
 ```bash
 sudo pacman -S <package_name>
@@ -35,7 +35,7 @@ Example:
 sudo pacman -S vlc
 ```
 
-### ❌ 1.3 Remove a Package
+### 1.3 Remove a Package
 
 ```bash
 sudo pacman -R <package_name>
@@ -47,7 +47,7 @@ Remove a package with its dependencies not used by others:
 sudo pacman -Rns <package_name>
 ```
 
-### 🔄 1.4 Update All Packages
+### 1.4 Update All Packages
 
 ```bash
 sudo pacman -Syu
@@ -55,7 +55,7 @@ sudo pacman -Syu
 
 This synchronizes and updates all system packages.
 
-### 🧹 1.5 Clean Unused Packages (orphans)
+### 1.5 Clean Unused Packages (orphans)
 
 ```bash
 sudo pacman -Rns $(pacman -Qtdq)
@@ -63,7 +63,7 @@ sudo pacman -Rns $(pacman -Qtdq)
 
 This removes orphaned packages you no longer need.
 
-### 🧹 1.6 Clean Cached Packages
+### 1.6 Clean Cached Packages
 
 ```bash
 sudo pacman -Scc
@@ -73,13 +73,13 @@ This removes cached packages you no longer need.
 
 ---
 
-## 🧰 Using AUR (Arch User Repository) with yay
+## Using AUR (Arch User Repository) with yay
 
 - ✅ [AUR setup guide](./yay_setup.md)
 
 ---
 
-## 💡 Tips & Best Practices
+## Tips & Best Practices
 
 - ✅ Prefer official repo packages first.
 - 🔍 Use `pacman -Qi <package>` to check installed package details.
@@ -90,7 +90,7 @@ This removes cached packages you no longer need.
 
 ---
 
-## 📌 Handy Shortcuts
+## Handy Shortcuts
 
 | Task                           | Command                                |
 | ------------------------------ | -------------------------------------- |
@@ -122,9 +122,9 @@ This removes cached packages you no longer need.
 
 ---
 
-## 🧠 Learn More
+## Learn More
 
-- 📘 [Arch Wiki - Pacman](https://wiki.archlinux.org/index.php/pacman)
-- 📘 [Arch Wiki - AUR](https://wiki.archlinux.org/title/Arch_User_Repository)
+- [Arch Wiki - Pacman](https://wiki.archlinux.org/index.php/pacman)
+- [Arch Wiki - AUR](https://wiki.archlinux.org/title/Arch_User_Repository)
 
 ---

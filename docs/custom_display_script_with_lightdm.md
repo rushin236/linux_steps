@@ -15,7 +15,7 @@ sudo pacman -Syu
 sudo pacman -S xorg-xrandr
 ```
 
-### 🖥️ 1. Generate .xrandr.conf File Automatically
+### 1. Generate .xrandr.conf File Automatically
 
 This script analyzes your current monitor layout using xrandr and creates
 a .xrandr.conf file in your home directory. The file will contain an xrandr
@@ -115,7 +115,7 @@ Use this command to locate `lightdm.conf`:
 sudo ls -al /etc/lightdm | grep 'lightdm.conf'
 ```
 
-#### 📝 Step 2: Edit the config file
+#### Step 2: Edit the config file
 
 Open the file in a text editor like `nano`:
 
@@ -143,7 +143,7 @@ won't break.
 
 ---
 
-### ⚠️ Having issues?
+### Having issues?
 
 If the display script isn't working, try adjusting this line in the `[LightDM]`
 section of the same file:
@@ -157,11 +157,11 @@ depending on its current state. This can help in some setups.
 
 ---
 
-### 🧰 Troubleshooting
+### Troubleshooting
 
 If LightDM isn't working as expected, check the logs for errors:
 
-#### 🔎 View LightDM logs
+#### View LightDM logs
 
 ```bash
 sudo cat /var/log/lightdm/lightdm.log
@@ -173,7 +173,7 @@ Or check the previous log:
 sudo cat /var/log/lightdm/lightdm.log.old
 ```
 
-#### 🔎 Check X session logs
+#### Check X session logs
 
 ```bash
 sudo cat /var/log/lightdm/x-0.log
@@ -187,9 +187,9 @@ sudo cat /var/log/lightdm/x-0.log.old
 
 ---
 
-## 🔧 Method 2: Using `autorandr` (Easy but needs extra setup)
+## Method 2: Using `autorandr` (Easy but needs extra setup)
 
-### ✅ Step 1: Install `autorandr`
+### Step 1: Install `autorandr`
 
 Run the following commands to install `autorandr`:
 
@@ -200,7 +200,7 @@ sudo pacman -S autorandr
 
 ---
 
-### ✅ Step 2: Enable and start the `autorandr` service
+### Step 2: Enable and start the `autorandr` service
 
 To use `autorandr`, enable and start it as your regular user:
 
@@ -218,7 +218,7 @@ sudo systemctl start autorandr
 
 ---
 
-### 🖥️ Step 3: Create an `autorandr` profile
+### Step 3: Create an `autorandr` profile
 
 You can save your current monitor layout into a profile like this:
 
@@ -233,7 +233,7 @@ This saves the display setup to:
 
 ---
 
-### ⚙️ Step 4: Create a systemd service to sync the profile
+### Step 4: Create a systemd service to sync the profile
 
 This will auto-copy the saved profile to system space for LightDM to use.
 
@@ -368,7 +368,7 @@ chmod +x /usr/local/bin/copy-lastused.sh
 
 ---
 
-### ⚙️ Step 6: Add autorandr to LightDM
+### Step 6: Add autorandr to LightDM
 
 In your LightDM config file at `/etc/lightdm/lightdm.conf`,  
 find the line under `[Seat:*]` that starts with `display-setup-script`.
@@ -383,7 +383,7 @@ display-setup-script=/bin/bash -c 'autorandr --load <profile-name> || true'
 
 ---
 
-### 📝 Optional: Link to LightDM setup
+### Optional: Link to LightDM setup
 
 See the setup steps for LightDM:
 [Go to LightDM config section️](#configure-lightdm)

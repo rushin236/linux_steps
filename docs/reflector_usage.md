@@ -1,10 +1,10 @@
-# ✅ What You Can Do
+# What You Can Do
 
 Here are some options to get a better result and fix mirror-related issues:
 
 ---
 
-## ✔️ Option 1: Increase the Timeout
+## Option 1: Increase the Timeout
 
 If you're on a slow connection or live far from Arch mirrors:
 
@@ -16,7 +16,7 @@ sudo reflector --latest 20 --protocol https --sort rate --timeout 10 --save /etc
 
 ---
 
-## ✔️ Option 2: Use Country-Limited Mirrors
+## Option 2: Use Country-Limited Mirrors
 
 You’ll likely get better speed and fewer timeouts by choosing mirrors close
 to your location.
@@ -35,7 +35,7 @@ sudo reflector --continent Asia --latest 20 --protocol https --sort rate --save 
 
 ---
 
-## ✔️ Option 3: Skip Broken Mirrors Automatically
+## Option 3: Skip Broken Mirrors Automatically
 
 Reflector has logic to skip non-working mirrors automatically, but you can
 further filter out broken ones with:
@@ -49,7 +49,7 @@ This makes it prefer mirrors that respond faster and penalizes flaky ones.
 
 ---
 
-## ❌ If Many Mirrors Timeout
+## If Many Mirrors Timeout
 
 You may be facing:
 

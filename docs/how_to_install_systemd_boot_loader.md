@@ -3,7 +3,7 @@
 This guide outlines steps to remove **GRUB** and install **systemd-boot** as
 your system bootloader on a UEFI system running **Arch Linux**.
 
-> ⚠️ Watch out:
+> Watch out:
 >
 > - This is intended **ONLY for UEFI systems**.
 > - Make sure `/boot` is mounted to the EFI System Partition (ESP).
@@ -11,7 +11,7 @@ your system bootloader on a UEFI system running **Arch Linux**.
 
 ---
 
-## 📝 Prerequisites
+## Prerequisites
 
 - Running **Arch Linux** in **UEFI mode**
 - EFI System Partition (ESP) mounted to `/boot`
@@ -20,9 +20,9 @@ your system bootloader on a UEFI system running **Arch Linux**.
 
 ---
 
-## 🧭 Step-by-step Instructions
+## Step-by-step Instructions
 
-### 1. 🚨 Confirm UEFI and ESP Mount
+### 1. Confirm UEFI and ESP Mount
 
 Make sure you're running in UEFI mode:
 
@@ -40,7 +40,7 @@ If it's not, you'll need to mount it there before proceeding.
 
 ---
 
-### 2. ✅ Install `systemd-boot`
+### 2. Install `systemd-boot`
 
 Install systemd-boot to the EFI system partition:
 
@@ -52,7 +52,7 @@ This installs `systemd-boot` to your ESP under `/boot/EFI/systemd`.
 
 ---
 
-### 3. 🧹 (Optional) Remove GRUB
+### 3. (Optional) Remove GRUB
 
 If you're sure everything is working and want to clean up:
 
@@ -74,7 +74,7 @@ efibootmgr -b xxxx -B
 
 ---
 
-### 4. ✍️ Create Loader and Entries
+### 4 Create Loader and Entries
 
 #### 4.1 Create `/boot/loader/loader.conf`
 
@@ -120,14 +120,14 @@ blkid /dev/sdXn
 
 ---
 
-### 5. ❗ If using mkinitcpio/mkinitrd for kernel
+### 5. If using mkinitcpio/mkinitrd for kernel
 
 Ensure your kernel and initramfs are located under `/boot` (not `/boot/efi` or
 elsewhere), or adjust paths accordingly.
 
 ---
 
-### 6. 🔁 Reboot and Test
+### 6. Reboot and Test
 
 Reboot your system:
 
@@ -140,7 +140,7 @@ Enter the firmware (UEFI setup) if needed, and choose `systemd-boot`
 
 ---
 
-## 🔄 Updating systemd-boot (Optional)
+## Updating systemd-boot (Optional)
 
 To update systemd-boot in the future:
 
@@ -150,18 +150,18 @@ bootctl update
 
 ---
 
-## ⚙️ Managing Boot Entries with `efibootmgr`
+## Managing Boot Entries with `efibootmgr`
 
 While `systemd-boot` manages its entries inside `/boot/loader/entries/`,
 you can also directly interact with UEFI firmware entries using **`efibootmgr`**.
 
-### 📦 Install efibootmgr
+### Install efibootmgr
 
 ```bash
 sudo pacman -S efibootmgr
 ```
 
-### 🔍 List current UEFI entries
+### List current UEFI entries
 
 ```bash
 sudo efibootmgr
@@ -178,7 +178,7 @@ Boot0001* UEFI: USB Device
 Boot0002* Linux Boot Manager
 ```
 
-### ✏️ Change Boot Order
+### Change Boot Order
 
 Set Linux (`0002`) to boot first:
 
@@ -186,7 +186,7 @@ Set Linux (`0002`) to boot first:
 sudo efibootmgr -o 0002,0000,0001
 ```
 
-### ➕ Add a New Entry (Example)
+### Add a New Entry (Example)
 
 Add a custom entry pointing to `systemd-boot`:
 
@@ -205,7 +205,7 @@ Remove entry `0000`:
 sudo efibootmgr -b 0000 -B
 ```
 
-### 🔄 Change BootNext (One-time Boot)
+### Change BootNext (One-time Boot)
 
 Boot into Windows (entry `0000`) on next reboot only:
 
@@ -215,15 +215,15 @@ sudo efibootmgr -n 0000
 
 ---
 
-## 📌 Notes
+## Notes
 
 - `systemd-boot` entries live in `/boot/loader/entries/` → you manage them by
   editing files.
 
 - `efibootmgr` works at the firmware level → useful for:
-  - fixing boot order
-  - removing old GRUB entries
-  - setting one-time boot
-    >
+    - fixing boot order
+    - removing old GRUB entries
+    - setting one-time boot
+        >
 - If things break, use an Arch ISO (live USB) to recover –
   mount your system and re-run `bootctl install`.

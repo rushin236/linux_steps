@@ -1,11 +1,11 @@
-# 🧰 1. Using AUR (Arch User Repository) with yay
+# 1. Using AUR (Arch User Repository) with yay
 
 AUR contains community-maintained packages not found in official repos.
 To install from it, you'll need an AUR helper like `yay`.
 
 ---
 
-## ⚙️ 1.1 Install `yay` (if not installed)
+## 1.1 Install `yay` (if not installed)
 
 ### Step 1: Install prerequisites
 
@@ -26,7 +26,7 @@ Once done, you can use `yay` like `pacman`.
 
 ---
 
-### 🔎 1.2 Search for a Package in AUR
+### 1.2 Search for a Package in AUR
 
 ```bash
 yay -Ss <package_name>
@@ -50,19 +50,19 @@ Example:
 yay -S google-chrome
 ```
 
-### 🔁 1.4 Update All Packages (Including AUR)
+### 1.4 Update All Packages (Including AUR)
 
 ```bash
 yay -Syu
 ```
 
-### 🧼 1.5 Remove a Package Installed via yay
+### 1.5 Remove a Package Installed via yay
 
 ```bash
 yay -Rns <package_name>
 ```
 
-### 🧹 1.6 Clean Cached Packages
+### 1.6 Clean Cached Packages
 
 ```bash
 yay -Scc
@@ -70,7 +70,7 @@ yay -Scc
 
 ---
 
-## 💡 Tips & Best Practices
+## Tips & Best Practices
 
 - ✅ Prefer official repo packages first.
 - 🔍 Use `yay -Qi <package>` to check installed package details.
@@ -81,7 +81,7 @@ yay -Scc
 
 ---
 
-## 📌 Handy Shortcuts
+## Handy Shortcuts
 
 | Task                           | Command                 |
 | ------------------------------ | ----------------------- |
@@ -93,7 +93,7 @@ yay -Scc
 
 ---
 
-## ❓ FAQ
+## FAQ
 
 ### 1. What's the difference between `-R`, `-Rs`, and `-Rns`?
 
@@ -113,7 +113,7 @@ yay -Scc
 
 ---
 
-## 🧠 Learn More
+## Learn More
 
-- 📘 [yay GitHub Repo](https://github.com/Jguer/yay)
-- 📘 [Arch Wiki - AUR](https://wiki.archlinux.org/title/Arch_User_Repository)
+- [yay GitHub Repo](https://github.com/Jguer/yay)
+- [Arch Wiki - AUR](https://wiki.archlinux.org/title/Arch_User_Repository)
